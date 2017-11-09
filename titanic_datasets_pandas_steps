@@ -1,0 +1,41 @@
+Tutorial for Pandas -> (titanic dataset) ->
+
+1. import pandas as pd (pip install pandas)
+2. df = pd.read_csv("train.csv")
+3. df
+4. df.shape
+5. df.survived.value_counts()
+6. df.sex.value_counts()
+7. df.sex.value_counts.plot(kind=bar)
+8. df[df.sex=='male']
+9. df[df.sex.is_null()]
+10. df.describe()
+	It gives mean. media. std, min max, quartile values
+11. df.fare.hist()
+12. df[df.fare=0]
+	It gives the values of persons which had fare 0
+13. df[df.sex=='male'].survived.value_counts().plot(kind=barh)
+14. to print 2 charts in screen at a time then 
+	fig,axs = plt.subplots(1,2)
+	df[df.sex=='male'].survived.value_counts().plot(kind=barh,ax=axes[0])
+15. for muliple and cases to plot ->
+	df[(df.age < 15) & (df.sex=='female')].survived.value_counts().plot(kind=barh)
+
+16. There are different stpes to handle missing data:
+	1. Remove the missing values.
+	2. Use some average value
+	3. Set Nan to 0 in case of continuos values
+	4. Create a machine learning algorithm to predict the values.
+
+17. avgage = df.age.mean()
+18. df.age = df.age.fillna(value=avgage)
+19. df.age.is_null() -> now there are no missing values
+
+Titanic Data sets usage using Random Forest ->
+
+1. form sklearn.ensemble import RandomForestRegressor
+2. from sklearn.metrics import roc_auc_score 
+	This is the error metric in this case we will use c-stat
+3. import pandas as pd
+4. X = pd.read_csv("train.csv")
+5. Y = X.pop('Survived')
